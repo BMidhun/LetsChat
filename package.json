@@ -7,9 +7,12 @@
     "start": "node server",
     "dev":"nodemon server"
   },
+<<<<<<< HEAD
   "engines": {
     "node": "12.16.1"
   },
+=======
+>>>>>>> 8f34c328a5beae58f3eb3e4b83f4a04977331943
   "author": "",
   "license": "ISC",
   "dependencies": {
