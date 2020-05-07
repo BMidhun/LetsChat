@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
 :root {
   --header-color: #502386;
   --background-color: #ebdef0;
@@ -22,7 +24,7 @@ html {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', 'Arial', sans-serif;
   background: var(--background-color);
   line-height: 1.5rem;
   color: var(--color-white);
