@@ -40,7 +40,6 @@ chatForm.addEventListener('submit', (event) => {
       //emit message to server
     socket.emit('chatMessage',message)
     event.target.elements.msg.value = '';
-    event.target.elements.msg.focus(); 
     }
     
 })
