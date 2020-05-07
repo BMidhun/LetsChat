@@ -8,7 +8,6 @@ const {username,rooms} = Qs.parse(location.search,{
     ignoreQueryPrefix:true
 })
 
-console.log(username,rooms)
 
 
 const socket = io();
@@ -22,7 +21,6 @@ socket.on('roomUsers',({room,users}) => {
 })
 
 socket.on('message',message => {
-        console.log(message)
         outputMessage(message);
 
         //Scroll to latest
@@ -65,7 +63,6 @@ const outputMessage  = (message) => {
 
 function displayRoomUsers (room,users) {
 
-  console.log(room,users);
   RoomName.innerText = room;
   const userList = users.map(user => `<li><h3>${user.username}</h3></li>`).join('');
 

@@ -227,9 +227,10 @@ select {
 .message-box-textbox {
   display: inline-block;
   width: 90%;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
   border : 1px solid #adadad;
-  border-radius : 5px;
+  border-radius : 50px;
+  outline: none;
 }
 
 .message-box .btn {
