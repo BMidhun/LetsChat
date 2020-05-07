@@ -17,7 +17,9 @@ const botName = 'Clara The Bot';
 
 io.on('connection', socket => {
 
-    // //Broadcasts to all users 
+    try{
+
+ // //Broadcasts to all users 
     // io.emit();
 
     
@@ -26,47 +28,53 @@ io.on('connection', socket => {
 
     socket.on('joinRoom',({username,rooms}) => {
     
-    const user = userJoin(socket.id,username,rooms);
-    socket.join(user.room);
+        const user = userJoin(socket.id,username,rooms);
+        socket.join(user.room);
+    
+    
+         // Welcome current user
+        socket.emit('message', formatMessage(botName,"Welcome to Let's Chat"));
+    
+        //Broadcast when a user connects. This message will not be seen by the user who is connecting
+        socket.to(user.room).emit('message',formatMessage(botName,`${user.username} has joined the chat`));
+    
+        io.to(user.room).emit('roomUsers',{
+            room : user.room,
+            users : getRoomUsers(user.room)
+        });
+    
+        })
+    
+        //Listen for chat message
+        socket.on('chatMessage',(message) => {
+            const user = getCurrentUser(socket.id);
+            io.to(user.room).emit('message',formatMessage(user.username,message));
+        });
+    
+        //Runs when client disconnects 
+        socket.on('disconnect',() => {
+            const user = userLeave(socket.id);
+            if(user){
+    
+                io.to(user.room)
+                .emit('message', 
+                formatMessage(botName,`${user.username} has left the chat`)
+                )
+    
+                io.to(user.room).emit('roomUsers',{
+                    room : user.room,
+                    users : getRoomUsers(user.room)
+                });
+                
+    
+            }
+        })
 
+    }catch(err) {
+        io.emit('message','Please refresh the page')
+    }
 
-     // Welcome current user
-    socket.emit('message', formatMessage(botName,"Welcome to Let's Chat"));
-
-    //Broadcast when a user connects. This message will not be seen by the user who is connecting
-    socket.to(user.room).emit('message',formatMessage(botName,`${user.username} has joined the chat`));
-
-    io.to(user.room).emit('roomUsers',{
-        room : user.room,
-        users : getRoomUsers(user.room)
-    });
-
-    })
-
-    //Listen for chat message
-    socket.on('chatMessage',(message) => {
-        const user = getCurrentUser(socket.id);
-        io.to(user.room).emit('message',formatMessage(user.username,message));
-    });
-
-    //Runs when client disconnects 
-    socket.on('disconnect',() => {
-        const user = userLeave(socket.id);
-        if(user){
-
-            io.to(user.room)
-            .emit('message', 
-            formatMessage(botName,`${user.username} has left the chat`)
-            )
-
-            io.to(user.room).emit('roomUsers',{
-                room : user.room,
-                users : getRoomUsers(user.room)
-            });
-            
-
-        }
-    })
+   
 })
 
 const PORT = process.env.PORT || 3000
