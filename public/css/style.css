@@ -265,7 +265,7 @@ select {
 
   .chat-section-screen {
     max-height: 100vh;
-    height: 100vh;  
+    height: 50vh;  
   }
 
   .message-box {
