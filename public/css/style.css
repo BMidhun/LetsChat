@@ -259,8 +259,7 @@ select {
     display: block;
   }
 
-  .chat-users,
-  .chat-section-screen {
+  .chat-users {
     max-height: 500px;
   }
 
