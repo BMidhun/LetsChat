@@ -31,7 +31,7 @@ io.on('connection', socket => {
 
 
      // Welcome current user
-    socket.emit('message', formatMessage(botName,'Welcome to ChartCord!'));
+    socket.emit('message', formatMessage(botName,"Welcome to Let's Chat"));
 
     //Broadcast when a user connects. This message will not be seen by the user who is connecting
     socket.to(user.room).emit('message',formatMessage(botName,`${user.username} has joined the chat`));
