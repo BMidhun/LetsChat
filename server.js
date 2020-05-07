@@ -29,10 +29,11 @@ io.on('connection', socket => {
     socket.on('joinRoom',({username,rooms}) => {
     
         const user = userJoin(socket.id,username,rooms);
+        if(user) {
+
         socket.join(user.room);
-    
-    
-         // Welcome current user
+
+             // Welcome current user
         socket.emit('message', formatMessage(botName,"Welcome to Let's Chat"));
     
         //Broadcast when a user connects. This message will not be seen by the user who is connecting
@@ -42,13 +43,15 @@ io.on('connection', socket => {
             room : user.room,
             users : getRoomUsers(user.room)
         });
-    
+        }
+        
         })
     
         //Listen for chat message
         socket.on('chatMessage',(message) => {
             const user = getCurrentUser(socket.id);
-            io.to(user.room).emit('message',formatMessage(user.username,message));
+            if(user)
+                io.to(user.room).emit('message',formatMessage(user.username,message));
         });
     
         //Runs when client disconnects 
