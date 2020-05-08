@@ -55,7 +55,7 @@ li {
   display: inline-block;
   padding: 0.5rem 1rem;
   color: var(--button-text-color);
-  background: var(--background-color);
+  background: var(--color-white);
   font-size: 1.2rem;
   border: none;
   cursor: pointer;
@@ -251,8 +251,9 @@ select {
   display: inline-block;
   width: 90%;
   padding: 1rem 1rem;
-  border : 1px solid #adadad;
-  border-radius : 15px;
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 11px;
   outline: none;
   resize: none;
 }
