@@ -75,6 +75,10 @@ h3 {
   margin: 1rem 0rem;
 }
 
+p {
+  margin: 0.5rem 0rem;
+}
+
 .text-date,
 .text-user {
   font-size: 0.85rem;
@@ -190,12 +194,29 @@ select {
 }
 
 .chat-box {
-  background: var(--background-color);
+  background: var(--header-color);
   padding: 0.75rem;
-  color: var(--dark-color);
   border-radius: 5px;
-  margin: 0.75rem 0rem;
+  margin: 1.5rem 0rem;
   animation: fade-in 0.2s ease-in 0s 1;
+  overflow-wrap: break-word;
+  box-shadow: 1px 5px 4px -1px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.chat-box::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--header-color);
+  width: 22px;
+  height: 30px;
+  /* border-top: 1px transparent; */
+  /* border-bottom: 1px transparent; */
+  clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
+  transform: translate(-14px,-24px);
 }
 
 @keyframes fade-in {
@@ -231,8 +252,9 @@ select {
   width: 90%;
   padding: 1rem 1rem;
   border : 1px solid #adadad;
-  border-radius : 50px;
+  border-radius : 15px;
   outline: none;
+  resize: none;
 }
 
 .message-box .btn {
@@ -268,7 +290,7 @@ select {
 
   .chat-section-screen {
     max-height: 100vh;
-    height: 50vh;  
+    height: calc(100vh - 350px);  
   }
 
   .message-box {
